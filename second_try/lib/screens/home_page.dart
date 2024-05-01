@@ -3,7 +3,8 @@ import 'package:second_try/screens/profile_screen.dart';
 import 'package:second_try/services/firebase_services.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final FirebaseServices firebaseServices =
+      FirebaseServices(); // Create instance
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +57,7 @@ class HomePage extends StatelessWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                 onPressed: () {
-                  FirebaseServices().createData(
+                  firebaseServices.createData(
                       data: dataController.text, image: imageController.text);
                   dataController.text = '';
                   imageController.text = '';
@@ -68,7 +69,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
             StreamBuilder(
-                stream: FirebaseServices().getData(),
+                stream: firebaseServices.getData(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return Expanded(
@@ -94,7 +95,7 @@ class HomePage extends StatelessWidget {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    FirebaseServices().removeFromDataBase(
+                                    firebaseServices.removeFromDataBase(
                                         snapshot.data?[index].id ?? '');
                                   },
                                   child: Text("delete"),
