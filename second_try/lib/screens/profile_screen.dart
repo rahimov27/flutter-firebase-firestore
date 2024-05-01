@@ -30,6 +30,14 @@ class ProfileScreen extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 30, fontWeight: FontWeight.w500),
                         ),
+                        TextButton(
+                            onPressed: () {
+                              FirebaseAuth.instance.currentUser!.delete();
+                            },
+                            child: Text(
+                              "Delete user",
+                              style: TextStyle(fontSize: 30),
+                            ))
                       ],
                     ),
                   );

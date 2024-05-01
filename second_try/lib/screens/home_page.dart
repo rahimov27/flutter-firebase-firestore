@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:second_try/screens/profile_screen.dart';
 import 'package:second_try/services/firebase_services.dart';
@@ -14,6 +15,15 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.red,
         actions: [
+          IconButton(
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+            },
+            icon: Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
+          ),
           IconButton(
             onPressed: () {
               Navigator.push(context,
@@ -68,6 +78,10 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
+            // StreamBuilder(
+            //   stream: FirebaseAuth.instance.authStateChanges(),
+            //   builder: (context, snapshot) => SizedBox(),
+            // ),
             StreamBuilder(
                 stream: firebaseServices.getData(),
                 builder: (context, snapshot) {
